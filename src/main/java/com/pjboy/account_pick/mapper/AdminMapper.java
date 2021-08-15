@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminMapper extends BaseMapper<AdminDO> {
-  AdminVO getVOByName(String username);
+  //AdminVO getVOByName(String username);
 }

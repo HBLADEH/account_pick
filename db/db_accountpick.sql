@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 12/08/2021 00:05:40
+ Date: 15/08/2021 23:21:59
 */
 
 SET NAMES utf8mb4;
@@ -100,6 +100,8 @@ CREATE TABLE `tb_goods`  (
   `cover_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '封面图片',
   `price` decimal(10, 2) NOT NULL COMMENT '商品价格',
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品介绍',
+  `game_id` int(11) NOT NULL COMMENT '游戏ID',
+  `channel_id` int(11) NULL DEFAULT NULL COMMENT '系统ID',
   `create_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `update_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
@@ -108,10 +110,10 @@ CREATE TABLE `tb_goods`  (
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES (6, '222', '444', 222.00, '333', '2021-08-08 17:55:53.858', '2021-08-08 17:55:53.858');
-INSERT INTO `tb_goods` VALUES (5, '111', '444', 222.00, '333', '2021-08-08 17:55:51.292', '2021-08-08 17:55:51.292');
-INSERT INTO `tb_goods` VALUES (4, '114', '444', 222.00, '333', '2021-08-08 14:57:38.070', '2021-08-08 14:57:38.070');
-INSERT INTO `tb_goods` VALUES (7, '333', '444', 222.00, '333', '2021-08-08 17:55:55.410', '2021-08-08 17:55:55.410');
-INSERT INTO `tb_goods` VALUES (8, '4444', '444', 222.00, '333', '2021-08-08 17:55:57.932', '2021-08-08 17:55:57.932');
+INSERT INTO `tb_goods` VALUES (6, '222', '444', 222.10, '333', 4, 4, '2021-08-08 17:55:53.858', '2021-08-15 22:58:25.946');
+INSERT INTO `tb_goods` VALUES (5, '111', '444', 222.00, '333', 4, 4, '2021-08-08 17:55:51.292', '2021-08-15 16:27:54.529');
+INSERT INTO `tb_goods` VALUES (4, '114', '444', 222.00, '333', 5, 5, '2021-08-08 14:57:38.070', '2021-08-15 16:27:54.531');
+INSERT INTO `tb_goods` VALUES (7, '333', '444', 222.00, '333', 6, 6, '2021-08-08 17:55:55.410', '2021-08-15 16:27:54.533');
+INSERT INTO `tb_goods` VALUES (8, '4444', '444', 222.00, '333', 7, 7, '2021-08-08 17:55:57.932', '2021-08-15 16:27:54.535');
 
 SET FOREIGN_KEY_CHECKS = 1;

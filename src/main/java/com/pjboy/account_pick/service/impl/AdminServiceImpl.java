@@ -27,19 +27,24 @@ public class AdminServiceImpl implements AdminService {
    * @Date: 2021/4/6
    */
   @Override
-  public AdminVO checkLogin(String username, String password) {
+  public AdminDO checkLogin(String username, String password) {
     QueryWrapper<AdminDO> wrapper = new QueryWrapper<>();
     wrapper.eq("username", username);
     AdminDO adminDO = adminMapper.selectOne(wrapper);
-    if (adminDO != null && encoder.matches(password, adminDO.getPassword())) {
-      DozerBeanMapper mapper = new DozerBeanMapper();
-      return mapper.map(adminDO, AdminVO.class);
-    }
-    return null;
+    //if (adminDO != null && encoder.matches(password, adminDO.getPassword())) {
+    //  DozerBeanMapper mapper = new DozerBeanMapper();
+    //  return mapper.map(adminDO, AdminVO.class);
+    //}
+    return adminDO;
   }
 
   @Override
-  public AdminDO getById(Long id) {
-    return adminMapper.selectById(id);
+  public AdminVO getById(Integer id) {
+    AdminDO adminDO = adminMapper.selectById(id);
+    if (adminDO != null) {
+        DozerBeanMapper mapper = new DozerBeanMapper();
+        return mapper.map(adminDO, AdminVO.class);
+    }
+    return null;
   }
 }

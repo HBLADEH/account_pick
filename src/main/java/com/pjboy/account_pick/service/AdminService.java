@@ -4,7 +4,7 @@ import com.pjboy.account_pick.model.AdminDO;
 import com.pjboy.account_pick.model.vo.AdminVO;
 
 public interface AdminService {
-  AdminVO checkLogin(String username, String password);
+  AdminDO checkLogin(String username, String password);
 
-  AdminDO getById(Long id);
+  AdminVO getById(Integer id);
 }
