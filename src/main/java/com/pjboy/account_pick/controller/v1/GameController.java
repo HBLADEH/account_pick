@@ -18,6 +18,14 @@ public class GameController {
   @Autowired
   private GameService gameService;
 
+  @GetMapping("/games")
+  private AjaxResponse listGames() {
+    List<GameDO> gameList = gameService.listGames();
+    String ErrorSelect = "获取游戏列表失败!";
+    if (gameList != null) return AjaxResponse.success(gameList);
+    return AjaxResponse.error(CustomExceptionType.SYSTEM_ERROR, ErrorSelect);
+  }
+
   @PostMapping("/games")
   private AjaxResponse addGame(@RequestBody GameDO gameDO) {
     BasicCheck.checkLogin(); // 检测登录
@@ -53,4 +61,5 @@ public class GameController {
     if (gameService.deleteGameByIds(ids) > 0) return AjaxResponse.success();
     return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorDelete);
   }
+
 }

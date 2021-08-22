@@ -11,4 +11,5 @@ public interface ChannelService {
   int deleteChannelById(Integer channelId);
   int deleteChannelByIds(List<Integer> ids);
   int updateChannel(ChannelDO channelDO);
+  List<ChannelDO> listChannelByGameId(Integer gameId);
 }

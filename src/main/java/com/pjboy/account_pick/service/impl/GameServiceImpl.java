@@ -17,6 +17,11 @@ public class GameServiceImpl implements GameService  {
   private GameMapper gameMapper;
 
   @Override
+  public List<GameDO> listGames() {
+    return gameMapper.selectList(null);
+  }
+
+  @Override
   public GameDO selectGameByName(String name) {
     QueryWrapper<GameDO> wrapper = new QueryWrapper<>();
     wrapper.eq("name", name);

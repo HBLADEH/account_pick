@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pjboy.account_pick.mapper.ChannelMapper">
+  <resultMap id="BaseResultMap" type="com.pjboy.account_pick.model.ChannelDO">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <id column="name" jdbcType="VARCHAR" property="name"/>
+  </resultMap>
+  <select id="listChannelByGameId" resultType="com.pjboy.account_pick.model.ChannelDO">
+    SELECT * FROM tb_channel c, tb_game_channel gc
+    <where>
+        c.id = gc.channelId
+      <if test="gameId != null">
+        AND gc.gameId = #{gameId}
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -16,6 +16,15 @@ public class ChannelController {
   @Autowired
   private ChannelService channelService;
 
+  @GetMapping("/channelsByGame/{gameId}")
+  private AjaxResponse listChannelsByGame(@PathVariable Integer gameId) {
+    List<ChannelDO> channelList = channelService.listChannelByGameId(gameId);
+    String ErrorSelect = "获取渠道列表失败!";
+    if (channelList != null) return AjaxResponse.success(channelList);
+    return AjaxResponse.error(CustomExceptionType.SYSTEM_ERROR, ErrorSelect);
+
+  }
+
   @PostMapping("/channels")
   private AjaxResponse addChannel(@RequestBody ChannelDO channelDO) {
     BasicCheck.checkLogin(); // 检测登录

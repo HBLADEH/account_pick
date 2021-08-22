@@ -42,4 +42,10 @@ public class ChannelServiceImpl implements ChannelService {
   public int updateChannel(ChannelDO channelDO) {
     return channelMapper.updateById(channelDO);
   }
+
+  @Override
+  public List<ChannelDO> listChannelByGameId(Integer gameId) {
+
+    return channelMapper.listChannelByGameId(gameId);
+  }
 }
