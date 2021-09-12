@@ -7,7 +7,6 @@ package com.pjboy.account_pick.exception;
  * @create: 2020-10-24 23:57
  **/
 public class CustomException extends RuntimeException {
-
   // 异常错误代码
   private int code;
 

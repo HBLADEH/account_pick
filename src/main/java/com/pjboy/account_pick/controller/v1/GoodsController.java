@@ -1,6 +1,5 @@
 package com.pjboy.account_pick.controller.v1;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pjboy.account_pick.controller.util.BasicCheck;
@@ -9,18 +8,39 @@ import com.pjboy.account_pick.exception.CustomExceptionType;
 import com.pjboy.account_pick.model.GoodsDO;
 import com.pjboy.account_pick.model.vo.GoodsVO;
 import com.pjboy.account_pick.service.GoodsService;
+import com.pjboy.account_pick.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1")
 public class GoodsController {
   @Autowired
   private GoodsService goodsService;
+
+  @Autowired
+  private UploadService uploadService;
+
+
+  @Value("${file.img.goodsContentImgSource}")
+  private String goodsContentImgSource;
+
+  @Value("${file.img.goodsContentImgURL}")
+  private String goodsContentImgURL;
+
+  @Value("${file.img.goodsCoverImgSource}")
+  private String goodsCoverImgSource;
+  @Value("${file.img.goodsCoverImgURL}")
+  private String goodsCoverImgURL;
+
 
   @PostMapping("/goods")
   private AjaxResponse addGoods(@RequestBody GoodsDO goodsDO) {
@@ -82,4 +102,33 @@ public class GoodsController {
     if (goodsVO != null) return AjaxResponse.success(goodsVO);
     return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
   }
+
+  @PostMapping("/goods/uploadContentImg")
+  public AjaxResponse uploadContentImg(@RequestBody MultipartFile file) {
+    return doUploadImg(file, goodsContentImgSource, goodsContentImgURL);
+  }
+
+  @PostMapping("/goods/uploadCoverImg")
+  public AjaxResponse uploadCoverImg(@RequestBody MultipartFile file) {
+    return doUploadImg(file, goodsCoverImgSource, goodsCoverImgURL);
+  }
+
+  /**
+  * @Description: 执行上传文件操作
+  * @Param: [file, goodsCoverImgSource, goodsCoverImgURL]
+  * @return: com.pjboy.account_pick.exception.AjaxResponse
+  * @Author: BLADE
+  * @Date: 2021/9/11
+  */
+  private AjaxResponse doUploadImg(MultipartFile file, String goodsCoverImgSource, String goodsCoverImgURL) {
+    String newFileName = new Date().getTime() + file.getOriginalFilename();
+    if (uploadService.uploadImg(goodsCoverImgSource, file, newFileName)) {
+      Map<String, String> map = new HashMap<>();
+      map.put("url", goodsCoverImgURL + newFileName);
+      return AjaxResponse.success(map);
+    }
+    return AjaxResponse.error(CustomExceptionType.REQUEST_REFUSE, "上传文件失败");
+  }
+
+
 }
