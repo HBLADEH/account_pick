@@ -47,13 +47,15 @@ public class GoodsServiceImpl implements GoodsService {
     return goodsMapper.updateById(goodsDO);
   }
 
+
+
   @Override
-  public IPage<GoodsVO> selectGoodsPage(Page<?> page, String goodsName, Date createTimeStart, Date createTimeEnd) {
+  public IPage<GoodsVO> selectGoodsPage(Page<?> page, Integer id, String goodsName, Integer gameId, Integer channelId, Date createTimeStart, Date createTimeEnd) {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String Start = null, End = null;
     if (createTimeStart != null) Start = sdf.format(createTimeStart);
     if (createTimeEnd != null) End = sdf.format(createTimeEnd);
-    return goodsMapper.selectGoodsPage(page, goodsName, Start, End);
+    return goodsMapper.selectGoodsPage(page, id, goodsName, gameId, channelId, Start, End);
   }
 
   @Override

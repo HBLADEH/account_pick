@@ -1,15 +1,19 @@
 package com.pjboy.account_pick.controller.v1;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pjboy.account_pick.controller.util.BasicCheck;
 import com.pjboy.account_pick.exception.AjaxResponse;
 import com.pjboy.account_pick.exception.CustomExceptionType;
 import com.pjboy.account_pick.model.GameDO;
 import com.pjboy.account_pick.model.GoodsDO;
+import com.pjboy.account_pick.model.vo.GoodsVO;
 import com.pjboy.account_pick.service.GameService;
 import com.pjboy.account_pick.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.List;
 
 @RestController
@@ -18,12 +22,35 @@ public class GameController {
   @Autowired
   private GameService gameService;
 
-  @GetMapping("/games")
-  private AjaxResponse listGames() {
-    List<GameDO> gameList = gameService.listGames();
-    String ErrorSelect = "获取游戏列表失败!";
-    if (gameList != null) return AjaxResponse.success(gameList);
-    return AjaxResponse.error(CustomExceptionType.SYSTEM_ERROR, ErrorSelect);
+  //@GetMapping("/games")
+  //private AjaxResponse listGames(@RequestParam(required = false) String name
+  //                               ) {
+  //  List<GameDO> gameList = gameService.listGames();
+  //  String ErrorSelect = "获取游戏列表失败!";
+  //  if (gameList != null) return AjaxResponse.success(gameList);
+  //  return AjaxResponse.error(CustomExceptionType.SYSTEM_ERROR, ErrorSelect);
+  //}
+
+  @GetMapping("/games/listAll")
+  public AjaxResponse selectGamesPage(@RequestParam() Integer pageSize,
+                                      @RequestParam() Integer currentPage,
+                                      @RequestParam(required = false) String name
+  ) {
+    BasicCheck.checkLogin(); // 检测登录
+    String ErrorEmpty = "未查询到游戏!";
+    Page<GameDO> page = new Page<>(currentPage, pageSize);
+    IPage<GameDO> gameDOIPage = gameService.selectGamesPage(page, name);
+    if (gameDOIPage != null) return AjaxResponse.success(gameDOIPage);
+    return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
+  }
+
+  @GetMapping("/games/{gameId}")
+  private AjaxResponse findGameById(@PathVariable Integer gameId) {
+    BasicCheck.checkLogin(); // 检测登录
+    String ErrorEmpty = "未查询到游戏!";
+    GameDO gameDO = gameService.findGameById(gameId);
+    if (gameDO != null) return AjaxResponse.success(gameDO);
+    return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
   }
 
   @PostMapping("/games")
@@ -37,8 +64,9 @@ public class GameController {
     return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorAdd);
   }
 
-  @PutMapping("/games")
-  public AjaxResponse updateGameById(@RequestBody GameDO gameDO) {
+  @PutMapping("/games/{gamesId}")
+  public AjaxResponse updateGameById(@PathVariable Integer gamesId, @RequestBody GameDO gameDO) {
+    gameDO.setId(gamesId);
     BasicCheck.checkLogin(); // 检测登录
     String ErrorUpdate = "修改游戏失败!";
     if (gameService.updateGame(gameDO) > 0) return AjaxResponse.success();

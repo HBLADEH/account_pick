@@ -13,7 +13,7 @@ spring:
 logging:
   level:
     org.springframework.boot.autoconfigure: error
-    com.pjboy.riddler_reserve.mapper: debug
+    com.pjboy.account_pick.mapper: debug
 debug: true
 
 # 文件上传

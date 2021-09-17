@@ -31,13 +31,13 @@ public interface GoodsService {
    * @param createTimeEnd   创建时间终点
    * @return 分页对象
    */
-  IPage<GoodsVO> selectGoodsPage(Page<?> page, String goodsName, Date createTimeStart, Date createTimeEnd);
+  IPage<GoodsVO> selectGoodsPage(Page<?> page, Integer id, String goodsName, Integer gameId, Integer channelId, Date createTimeStart, Date createTimeEnd);
 
-  /**
-   * 根据 id 查询对应的商品
-   *
-   * @param goodsId id
-   * @return GoodsVO
-   */
+    /**
+     * 根据 id 查询对应的商品
+     *
+     * @param goodsId id
+     * @return GoodsVO
+     */
   GoodsVO selectGoodsById(Integer goodsId);
 }

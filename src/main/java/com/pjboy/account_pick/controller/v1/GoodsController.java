@@ -81,7 +81,10 @@ public class GoodsController {
   @GetMapping("/goods/listAll")
   public AjaxResponse selectAllByList(@RequestParam() Integer pageSize,
                                       @RequestParam() Integer currentPage,
+                                      @RequestParam(required = false) Integer id,
                                       @RequestParam(required = false) String name,
+                                      @RequestParam(required = false) Integer gameId,
+                                      @RequestParam(required = false) Integer channelId,
                                       @RequestParam(required = false)
                                       @DateTimeFormat(pattern = "yyyy-MM-dd") Date createTimeStart,
                                       @RequestParam(required = false)
@@ -89,7 +92,7 @@ public class GoodsController {
     BasicCheck.checkLogin(); // 检测登录
     String ErrorEmpty = "未查询到商品!";
     Page<GoodsVO> page = new Page<>(currentPage, pageSize);
-    IPage<GoodsVO> goodsVOIPage = goodsService.selectGoodsPage(page, name, createTimeStart, createTimeEnd);
+    IPage<GoodsVO> goodsVOIPage = goodsService.selectGoodsPage(page, id, name, gameId, channelId, createTimeStart, createTimeEnd);
     if (goodsVOIPage != null) return AjaxResponse.success(goodsVOIPage);
     return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
   }
@@ -114,12 +117,12 @@ public class GoodsController {
   }
 
   /**
-  * @Description: 执行上传文件操作
-  * @Param: [file, goodsCoverImgSource, goodsCoverImgURL]
-  * @return: com.pjboy.account_pick.exception.AjaxResponse
-  * @Author: BLADE
-  * @Date: 2021/9/11
-  */
+   * @Description: 执行上传文件操作
+   * @Param: [file, goodsCoverImgSource, goodsCoverImgURL]
+   * @return: com.pjboy.account_pick.exception.AjaxResponse
+   * @Author: BLADE
+   * @Date: 2021/9/11
+   */
   private AjaxResponse doUploadImg(MultipartFile file, String goodsCoverImgSource, String goodsCoverImgURL) {
     String newFileName = new Date().getTime() + file.getOriginalFilename();
     if (uploadService.uploadImg(goodsCoverImgSource, file, newFileName)) {

@@ -20,10 +20,21 @@
     tb_channel.name as "channel_name",
     cover_img,
     create_time, update_time
-    FROM tb_goods, tb_game, tb_channel
+    FROM tb_goods
+    LEFT JOIN tb_game ON tb_goods.game_id = tb_game.id
+    LEFT JOIN tb_channel ON tb_goods.channel_id = tb_channel.id
     <where>
       <if test="goodsName != null">
         tb_goods.name LIKE CONCAT('%',#{goodsName},'%')
+      </if>
+      <if test="id != null">
+        AND tb_goods.id LIKE CONCAT('%',#{id},'%')
+      </if>
+      <if test="gameId != null">
+        AND tb_goods.game_id = #{gameId}
+      </if>
+      <if test="channelId != null">
+        AND tb_goods.channel_id = #{channelId}
       </if>
       <if test="createTimeStart != null">
         AND create_time >= CONCAT('','${createTimeStart}',' 00:00:00')
@@ -31,8 +42,6 @@
       <if test="createTimeEnd != null">
         AND create_time &lt;= CONCAT('','${createTimeEnd}',' 23:59:59')
       </if>
-      AND tb_goods.game_id = tb_game.id
-      AND tb_goods.channel_id = tb_channel.id
     </where>
   </select>
 
@@ -45,13 +54,13 @@
     cover_img,
     create_time,
     update_time
-    FROM tb_goods, tb_game, tb_channel
+    FROM tb_goods
+    LEFT JOIN tb_game ON tb_goods.game_id = tb_game.id
+    LEFT JOIN tb_channel ON tb_goods.channel_id = tb_channel.id
     <where>
       <if test="goodsId != null">
         tb_goods.id = #{goodsId}
       </if>
-      AND tb_goods.game_id = tb_game.id
-      AND tb_goods.channel_id = tb_channel.id
     </where>
   </select>
 </mapper>

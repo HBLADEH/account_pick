@@ -15,12 +15,19 @@ public interface GoodsMapper extends BaseMapper<GoodsDO> {
    * 查询 : 根据state状态查询商品列表，分页显示
    * </p>
    *
-   * @param page  分页对象,xml中可以从里面进行取值,传递参数 Page 即自动分页,必须放在第一位(你可以继承Page实现自己的分页对象)
-   * @param goodsName 名称
+   * @param page            分页对象,xml中可以从里面进行取值,传递参数 Page 即自动分页,必须放在第一位(你可以继承Page实现自己的分页对象)
+   * @param goodsName       名称
    * @param createTimeStart 创建时间起点
-   * @param createTimeEnd 创建时间终点
+   * @param createTimeEnd   创建时间终点
    * @return 分页对象
    */
-  IPage<GoodsVO> selectGoodsPage(Page<?> page, @Param("goodsName") String goodsName, @Param("createTimeStart") String createTimeStart, @Param("createTimeEnd") String createTimeEnd);
-  GoodsVO selectGoodsById( @Param("goodsId") Integer goodsId);
+  IPage<GoodsVO> selectGoodsPage(Page<?> page,
+                                 @Param("id") Integer id,
+                                 @Param("goodsName") String goodsName,
+                                 @Param("gameId") Integer gameId,
+                                 @Param("channelId") Integer channelId,
+                                 @Param("createTimeStart") String createTimeStart,
+                                 @Param("createTimeEnd") String createTimeEnd);
+
+  GoodsVO selectGoodsById(@Param("goodsId") Integer goodsId);
 }

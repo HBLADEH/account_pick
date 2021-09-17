@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 15/08/2021 23:21:59
+ Date: 18/09/2021 00:05:12
 */
 
 SET NAMES utf8mb4;
@@ -69,13 +69,19 @@ CREATE TABLE `tb_game`  (
 -- ----------------------------
 -- Records of tb_game
 -- ----------------------------
-INSERT INTO `tb_game` VALUES (4, '游戏4');
+INSERT INTO `tb_game` VALUES (14, '111');
+INSERT INTO `tb_game` VALUES (13, '33');
+INSERT INTO `tb_game` VALUES (11, '三国杀');
+INSERT INTO `tb_game` VALUES (12, '66');
 INSERT INTO `tb_game` VALUES (5, '游戏5');
 INSERT INTO `tb_game` VALUES (6, '游戏6');
 INSERT INTO `tb_game` VALUES (7, '游戏7');
 INSERT INTO `tb_game` VALUES (8, '游戏8');
 INSERT INTO `tb_game` VALUES (9, '游戏9');
 INSERT INTO `tb_game` VALUES (10, '游戏10');
+INSERT INTO `tb_game` VALUES (15, '123');
+INSERT INTO `tb_game` VALUES (16, '111111111111');
+INSERT INTO `tb_game` VALUES (17, '44441');
 
 -- ----------------------------
 -- Table structure for tb_game_channel
@@ -89,6 +95,9 @@ CREATE TABLE `tb_game_channel`  (
 -- ----------------------------
 -- Records of tb_game_channel
 -- ----------------------------
+INSERT INTO `tb_game_channel` VALUES (4, 4);
+INSERT INTO `tb_game_channel` VALUES (5, 4);
+INSERT INTO `tb_game_channel` VALUES (6, 4);
 
 -- ----------------------------
 -- Table structure for tb_goods
@@ -105,15 +114,34 @@ CREATE TABLE `tb_goods`  (
   `create_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `update_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_goods
 -- ----------------------------
-INSERT INTO `tb_goods` VALUES (6, '222', '444', 222.10, '333', 4, 4, '2021-08-08 17:55:53.858', '2021-08-15 22:58:25.946');
-INSERT INTO `tb_goods` VALUES (5, '111', '444', 222.00, '333', 4, 4, '2021-08-08 17:55:51.292', '2021-08-15 16:27:54.529');
-INSERT INTO `tb_goods` VALUES (4, '114', '444', 222.00, '333', 5, 5, '2021-08-08 14:57:38.070', '2021-08-15 16:27:54.531');
-INSERT INTO `tb_goods` VALUES (7, '333', '444', 222.00, '333', 6, 6, '2021-08-08 17:55:55.410', '2021-08-15 16:27:54.533');
-INSERT INTO `tb_goods` VALUES (8, '4444', '444', 222.00, '333', 7, 7, '2021-08-08 17:55:57.932', '2021-08-15 16:27:54.535');
+INSERT INTO `tb_goods` VALUES (6, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (2, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-14 23:22:41.197');
+INSERT INTO `tb_goods` VALUES (1, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (9, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-14 23:22:41.197');
+INSERT INTO `tb_goods` VALUES (10, '99999', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 88.76, '<p><strong>1231231231233424324234234</strong></p><p><span style=\"color:hsl(180,75%,60%);\"><strong>123</strong></span></p><figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static/goods/content/images/16313720371771624621546129.jpg\"></figure>', 5, 0, '2021-09-11 22:54:06.855', '2021-09-15 09:41:31.356');
+INSERT INTO `tb_goods` VALUES (3, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (15, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-15 23:39:58.040');
+INSERT INTO `tb_goods` VALUES (13, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-15 23:39:58.044');
+INSERT INTO `tb_goods` VALUES (7, '99999', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 88.76, '<p><strong>1231231231233424324234234</strong></p><p><span style=\"color:hsl(180,75%,60%);\"><strong>123</strong></span></p><figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static/goods/content/images/16313720371771624621546129.jpg\"></figure>', 5, 0, '2021-09-11 22:54:06.855', '2021-09-15 09:41:31.356');
+INSERT INTO `tb_goods` VALUES (8, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (11, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-14 23:22:41.197');
+INSERT INTO `tb_goods` VALUES (14, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (16, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (17, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-14 23:22:41.197');
+INSERT INTO `tb_goods` VALUES (18, '99999', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 88.76, '<p><strong>1231231231233424324234234</strong></p><p><span style=\"color:hsl(180,75%,60%);\"><strong>123</strong></span></p><figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static/goods/content/images/16313720371771624621546129.jpg\"></figure>', 5, 0, '2021-09-11 22:54:06.855', '2021-09-15 09:41:31.356');
+INSERT INTO `tb_goods` VALUES (19, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (20, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-14 23:22:41.197');
+INSERT INTO `tb_goods` VALUES (21, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (22, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-15 23:39:58.040');
+INSERT INTO `tb_goods` VALUES (23, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-15 23:39:58.044');
+INSERT INTO `tb_goods` VALUES (24, '99999', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 88.76, '<p><strong>1231231231233424324234234</strong></p><p><span style=\"color:hsl(180,75%,60%);\"><strong>123</strong></span></p><figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static/goods/content/images/16313720371771624621546129.jpg\"></figure>', 5, 0, '2021-09-11 22:54:06.855', '2021-09-15 09:41:31.356');
+INSERT INTO `tb_goods` VALUES (25, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (26, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-14 23:22:41.197');
+INSERT INTO `tb_goods` VALUES (27, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
 
 SET FOREIGN_KEY_CHECKS = 1;
