@@ -5,7 +5,6 @@
     <id column="id" jdbcType="INTEGER" property="id"/>
     <result column="name" jdbcType="VARCHAR" property="name"/>
   </resultMap>
-
   <select id="selectGamesPage" resultMap="BaseResultMap">
     SELECT
     tb_game.*
@@ -16,4 +15,11 @@
       </if>
     </where>
   </select>
+  <insert id="insertChannelsAndGameId" parameterType="com.pjboy.account_pick.model.from.GameFrom">
+    INSERT INTO tb_game_channel(gameId,channelId)
+    VALUES
+    <foreach collection="gameFrom.channelList" item="channelId" separator=",">
+      (#{gameFrom.id},#{channelId})
+    </foreach>
+  </insert>
 </mapper>

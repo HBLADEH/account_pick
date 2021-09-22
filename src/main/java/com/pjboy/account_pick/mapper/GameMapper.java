@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pjboy.account_pick.model.GameDO;
+import com.pjboy.account_pick.model.from.GameFrom;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,6 @@ public interface GameMapper extends BaseMapper<GameDO> {
   */
   IPage<GameDO> selectGamesPage(Page<?> page,
                                 @Param("name") String name);
+  int insertChannelsAndGameId(@Param("gameFrom") GameFrom gameFrom);
+
 }

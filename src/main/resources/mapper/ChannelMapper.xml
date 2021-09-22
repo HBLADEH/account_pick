@@ -8,9 +8,17 @@
   <select id="listChannelByGameId" resultType="com.pjboy.account_pick.model.ChannelDO">
     SELECT * FROM tb_channel c, tb_game_channel gc
     <where>
-        c.id = gc.channelId
+      c.id = gc.channelId
       <if test="gameId != null">
         AND gc.gameId = #{gameId}
+      </if>
+    </where>
+  </select>
+  <select id="selectChannelsPage" resultMap="BaseResultMap">
+    SELECT * FROM tb_channel
+    <where>
+      <if test="name != null">
+        tb_channel.name LIKE CONCAT('%',#{name},'%')
       </if>
     </where>
   </select>

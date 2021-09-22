@@ -1,5 +1,7 @@
 package com.pjboy.account_pick.controller.v1;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pjboy.account_pick.controller.util.BasicCheck;
 import com.pjboy.account_pick.exception.AjaxResponse;
 import com.pjboy.account_pick.exception.CustomExceptionType;
@@ -7,6 +9,7 @@ import com.pjboy.account_pick.model.ChannelDO;
 import com.pjboy.account_pick.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.css.CSSUnknownRule;
 
 import java.util.List;
 
@@ -15,6 +18,36 @@ import java.util.List;
 public class ChannelController {
   @Autowired
   private ChannelService channelService;
+
+  @GetMapping("/channels")
+  private AjaxResponse listChannels() {
+    String ErrorEmpty = "未查询到渠道!";
+    List<ChannelDO> channelDOList = channelService.listChannels();
+    if (channelDOList != null) return AjaxResponse.success(channelDOList);
+    return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
+  }
+
+
+  @GetMapping("/channels/listAll")
+  private AjaxResponse selectChannelsPage(@RequestParam() Integer pageSize,
+                                          @RequestParam() Integer currentPage,
+                                          @RequestParam(required = false) String name) {
+    BasicCheck.checkLogin(); // 检测登录
+    String ErrorEmpty = "未查询到渠道!";
+    Page<ChannelDO> page = new Page<>(currentPage, pageSize);
+    IPage<ChannelDO> channelDOPage = channelService.selectChannelsPage(page, name);
+    if (channelDOPage != null) return AjaxResponse.success(channelDOPage);
+    return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
+  }
+
+  @GetMapping("/channels/{channelId}")
+  private AjaxResponse findChannelById(@PathVariable Integer channelId) {
+    String ErrorEmpty = "未查询到渠道!";
+    ChannelDO channelDO = channelService.findChannelById(channelId);
+    if (channelDO != null) return AjaxResponse.success(channelDO);
+    return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
+  }
+
 
   @GetMapping("/channelsByGame/{gameId}")
   private AjaxResponse listChannelsByGame(@PathVariable Integer gameId) {
@@ -36,9 +69,10 @@ public class ChannelController {
     return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorAdd);
   }
 
-  @PutMapping("/channels")
-  public AjaxResponse updateChannelById(@RequestBody ChannelDO channelDO) {
+  @PutMapping("/channels/{channelId}")
+  public AjaxResponse updateChannelById(@PathVariable Integer channelId, @RequestBody ChannelDO channelDO) {
     BasicCheck.checkLogin(); // 检测登录
+    channelDO.setId(channelId);
     String ErrorUpdate = "修改渠道失败!";
     if (channelService.updateChannel(channelDO) > 0) return AjaxResponse.success();
     return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorUpdate);

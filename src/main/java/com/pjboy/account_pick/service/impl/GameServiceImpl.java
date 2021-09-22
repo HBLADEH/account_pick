@@ -1,11 +1,15 @@
 package com.pjboy.account_pick.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.pjboy.account_pick.mapper.GameChannelMapper;
 import com.pjboy.account_pick.mapper.GameMapper;
 import com.pjboy.account_pick.mapper.GoodsMapper;
+import com.pjboy.account_pick.model.GameChannelDO;
 import com.pjboy.account_pick.model.GameDO;
+import com.pjboy.account_pick.model.from.GameFrom;
 import com.pjboy.account_pick.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,9 @@ public class GameServiceImpl implements GameService {
 
   @Autowired
   private GameMapper gameMapper;
+
+  @Autowired
+  private GameChannelMapper gameChannelMapper;
 
   @Override
   public List<GameDO> listGames() {
@@ -41,8 +48,18 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public int addGame(GameDO gameDO) {
-    return gameMapper.insert(gameDO);
+  public int addGame(GameFrom gameFrom) {
+    GameDO gameDO = new GameDO(gameFrom.getId(), gameFrom.getName());
+    if (gameMapper.insert(gameDO) > 0) {
+      gameFrom.setId(gameDO.getId());
+      int count = gameMapper.insertChannelsAndGameId(gameFrom);
+      if (count > 0) return count;
+      else {
+        gameMapper.deleteById(gameDO.getId());
+        return -1;
+      }
+    }
+    return -1;
   }
 
   @Override
@@ -56,7 +73,14 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public int updateGame(GameDO gameDO) {
-    return gameMapper.updateById(gameDO);
+  public int updateGame(GameFrom gameFrom) {
+    GameDO gameDO = new GameDO(gameFrom.getId(), gameFrom.getName());
+    if (gameMapper.updateById(gameDO) > 0) {
+      QueryWrapper<GameChannelDO> wrapper = new QueryWrapper<>();
+      wrapper.eq("gameId", gameFrom.getId());
+      gameChannelMapper.delete(wrapper);
+      return gameMapper.insertChannelsAndGameId(gameFrom);
+    }
+    return -1;
   }
 }

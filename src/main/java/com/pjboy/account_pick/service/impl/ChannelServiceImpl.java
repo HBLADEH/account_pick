@@ -1,6 +1,8 @@
 package com.pjboy.account_pick.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pjboy.account_pick.mapper.ChannelMapper;
 import com.pjboy.account_pick.model.ChannelDO;
 import com.pjboy.account_pick.service.ChannelService;
@@ -17,10 +19,25 @@ public class ChannelServiceImpl implements ChannelService {
   private ChannelMapper channelMapper;
 
   @Override
+  public List<ChannelDO> listChannels() {
+    return channelMapper.selectList(null);
+  }
+
+  @Override
   public ChannelDO selectChannelByName(String name) {
     QueryWrapper<ChannelDO> wrapper = new QueryWrapper<>();
     wrapper.eq("name", name);
     return channelMapper.selectOne(wrapper);
+  }
+
+  @Override
+  public ChannelDO findChannelById(Integer channelId) {
+    return channelMapper.selectById(channelId);
+  }
+
+  @Override
+  public IPage<ChannelDO> selectChannelsPage(Page<?> page, String name) {
+    return channelMapper.selectChannelsPage(page, name);
   }
 
   @Override
