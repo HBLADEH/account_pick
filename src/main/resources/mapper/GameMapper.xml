@@ -16,7 +16,7 @@
     </where>
   </select>
   <insert id="insertChannelsAndGameId" parameterType="com.pjboy.account_pick.model.from.GameFrom">
-    INSERT INTO tb_game_channel(gameId,channelId)
+    INSERT INTO tb_game_channel(game_id,channel_id)
     VALUES
     <foreach collection="gameFrom.channelList" item="channelId" separator=",">
       (#{gameFrom.id},#{channelId})

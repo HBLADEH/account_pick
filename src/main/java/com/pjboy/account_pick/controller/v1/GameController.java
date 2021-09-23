@@ -48,8 +48,8 @@ public class GameController {
   private AjaxResponse findGameById(@PathVariable Integer gameId) {
     BasicCheck.checkLogin(); // 检测登录
     String ErrorEmpty = "未查询到游戏!";
-    GameDO gameDO = gameService.findGameById(gameId);
-    if (gameDO != null) return AjaxResponse.success(gameDO);
+    GameFrom gameFrom = gameService.findGameFromById(gameId);
+    if (gameFrom != null) return AjaxResponse.success(gameFrom);
     return AjaxResponse.error(CustomExceptionType.USER_INPUT_ERROR, ErrorEmpty);
   }
 

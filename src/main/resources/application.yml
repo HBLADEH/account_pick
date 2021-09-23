@@ -33,6 +33,10 @@ spring:
     user:
       name: blade
       password: 123
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
 # mybatis-plus
 mybatis-plus:
   configuration:

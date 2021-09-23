@@ -8,9 +8,9 @@
   <select id="listChannelByGameId" resultType="com.pjboy.account_pick.model.ChannelDO">
     SELECT * FROM tb_channel c, tb_game_channel gc
     <where>
-      c.id = gc.channelId
+      c.id = gc.channel_id
       <if test="gameId != null">
-        AND gc.gameId = #{gameId}
+        AND gc.game_id = #{gameId}
       </if>
     </where>
   </select>

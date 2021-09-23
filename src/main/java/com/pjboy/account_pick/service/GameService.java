@@ -13,7 +13,7 @@ public interface GameService {
   List<GameDO> listGames();
   IPage<GameDO> selectGamesPage(Page<?> page, String name);
   GameDO selectGameByName(String name);
-  GameDO findGameById(Integer id);
+  GameFrom findGameFromById(Integer id);
   int addGame(GameFrom gameFrom);
   int deleteGameById(Integer gameId);
   int deleteGameByIds(List<Integer> ids);

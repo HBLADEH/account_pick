@@ -11,7 +11,7 @@
  Target Server Version : 80012
  File Encoding         : 65001
 
- Date: 23/09/2021 00:12:51
+ Date: 23/09/2021 23:20:03
 */
 
 SET NAMES utf8mb4;
@@ -49,7 +49,8 @@ CREATE TABLE `tb_channel`  (
 -- ----------------------------
 -- Records of tb_channel
 -- ----------------------------
-INSERT INTO `tb_channel` VALUES (12, '11');
+INSERT INTO `tb_channel` VALUES (25, '其它渠道服');
+INSERT INTO `tb_channel` VALUES (24, 'Ios');
 INSERT INTO `tb_channel` VALUES (10, '游戏11');
 INSERT INTO `tb_channel` VALUES (4, '渠道55');
 INSERT INTO `tb_channel` VALUES (5, '渠道6');
@@ -62,6 +63,7 @@ INSERT INTO `tb_channel` VALUES (14, '22222');
 INSERT INTO `tb_channel` VALUES (15, '3333333');
 INSERT INTO `tb_channel` VALUES (16, '44444');
 INSERT INTO `tb_channel` VALUES (17, '666');
+INSERT INTO `tb_channel` VALUES (23, 'Android');
 
 -- ----------------------------
 -- Table structure for tb_game
@@ -71,17 +73,14 @@ CREATE TABLE `tb_game`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '游戏名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_game
 -- ----------------------------
-INSERT INTO `tb_game` VALUES (14, '111');
-INSERT INTO `tb_game` VALUES (13, '33');
-INSERT INTO `tb_game` VALUES (11, '三国杀');
-INSERT INTO `tb_game` VALUES (12, '66');
-INSERT INTO `tb_game` VALUES (5, '21');
-INSERT INTO `tb_game` VALUES (6, '游戏6');
+INSERT INTO `tb_game` VALUES (32, '光遇');
+INSERT INTO `tb_game` VALUES (31, '三国杀');
+INSERT INTO `tb_game` VALUES (6, '66');
 INSERT INTO `tb_game` VALUES (7, '游戏7');
 INSERT INTO `tb_game` VALUES (8, '游戏8');
 INSERT INTO `tb_game` VALUES (9, '游戏9');
@@ -96,18 +95,21 @@ INSERT INTO `tb_game` VALUES (25, '游戏120');
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_game_channel`;
 CREATE TABLE `tb_game_channel`  (
-  `channelId` int(11) NOT NULL COMMENT '渠道ID',
-  `gameId` int(11) NOT NULL COMMENT '游戏ID'
+  `channel_id` int(11) NOT NULL COMMENT '渠道ID',
+  `game_id` int(11) NOT NULL COMMENT '游戏ID'
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of tb_game_channel
 -- ----------------------------
-INSERT INTO `tb_game_channel` VALUES (4, 4);
-INSERT INTO `tb_game_channel` VALUES (5, 4);
-INSERT INTO `tb_game_channel` VALUES (6, 4);
-INSERT INTO `tb_game_channel` VALUES (2, 5);
-INSERT INTO `tb_game_channel` VALUES (1, 5);
+INSERT INTO `tb_game_channel` VALUES (4, 6);
+INSERT INTO `tb_game_channel` VALUES (5, 6);
+INSERT INTO `tb_game_channel` VALUES (6, 6);
+INSERT INTO `tb_game_channel` VALUES (25, 31);
+INSERT INTO `tb_game_channel` VALUES (23, 32);
+INSERT INTO `tb_game_channel` VALUES (24, 31);
+INSERT INTO `tb_game_channel` VALUES (24, 32);
+INSERT INTO `tb_game_channel` VALUES (23, 31);
 
 -- ----------------------------
 -- Table structure for tb_goods
@@ -153,5 +155,6 @@ INSERT INTO `tb_goods` VALUES (24, '99999', 'http://image.accountpick.com:8888/s
 INSERT INTO `tb_goods` VALUES (25, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
 INSERT INTO `tb_goods` VALUES (26, '123123123', 'http://image.accountpick.com:8888/static/goods/coverImage/16313720447461624621546129.jpg', 99.60, '<figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static//goods/content/images/16313718093481624621546129.jpg\"></figure><p>1234567809</p>', 4, 5, '2021-09-11 22:50:11.148', '2021-09-14 23:22:41.197');
 INSERT INTO `tb_goods` VALUES (27, '222', 'http://image.accountpick.com:8888/static/goods/coverImage/1631633132195pj80x80.jpg', 222.10, '<p>333</p>', 4, 4, '2021-08-08 17:55:53.858', '2021-09-14 23:25:33.877');
+INSERT INTO `tb_goods` VALUES (28, '三国杀商品', 'http://image.accountpick.com:8888/static/goods/coverImage/1632409995290pj80x80.jpg', 123.45, '<p style=\"text-align:center;\"><span style=\"color:hsl(0, 75%, 60%);\"><strong>低价大将军，支持分期/花呗/信用卡，交易走淘宝，安全有保障，永久售后，找回全额包赔！欲购从速！</strong></span></p><figure class=\"image\"><img src=\"http://image.accountpick.com:8888/static/goods/content/images/1632410009122mmexport1632408544437.jpg\"></figure>', 31, 23, '2021-09-23 23:13:50.564', '2021-09-23 23:13:50.564');
 
 SET FOREIGN_KEY_CHECKS = 1;

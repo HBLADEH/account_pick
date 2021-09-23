@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pjboy.account_pick.mapper.ChannelMapper;
+import com.pjboy.account_pick.mapper.GameChannelMapper;
 import com.pjboy.account_pick.model.ChannelDO;
+import com.pjboy.account_pick.model.GameChannelDO;
 import com.pjboy.account_pick.service.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ public class ChannelServiceImpl implements ChannelService {
 
   @Autowired
   private ChannelMapper channelMapper;
+
+  @Autowired
+  private GameChannelMapper gameChannelMapper;
 
   @Override
   public List<ChannelDO> listChannels() {
@@ -47,6 +52,9 @@ public class ChannelServiceImpl implements ChannelService {
 
   @Override
   public int deleteChannelById(Integer channelId) {
+    QueryWrapper<GameChannelDO> wrapper = new QueryWrapper<>();
+    wrapper.eq("channel_id", channelId);
+    gameChannelMapper.delete(wrapper); // 顺便清理下关联表
     return channelMapper.deleteById(channelId);
   }
 
